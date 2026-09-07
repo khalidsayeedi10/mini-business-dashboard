@@ -1,3 +1,9 @@
+import Sidebar from "./components/Sidebar";
+
 export default function App() {
-	return <h1>Mini Business Dashboard</h1>;
+	return (
+		<div className="app">
+			<Sidebar />
+		</div>
+	);
 }
