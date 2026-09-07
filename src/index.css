@@ -6,3 +6,24 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
 }
+.layout {
+    display: flex;
+}
+
+.main-content {
+    flex: 1;
+    padding: 24px;
+}
+
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+.summary-card {
+    padding: 20px;
+    border: 1px solid #a19e9e;
+    border-radius: 8px;
+}
