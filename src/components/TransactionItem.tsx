@@ -9,7 +9,7 @@ function TransactionItem({ transaction: { customer, type, amount } }: Transactio
     return (
         <div className="transaction-item">
             <span>{customer}</span>
-            <span>{type}</span>
+            <span className={type === "Sale" ? "sale" : "expense"}>{type}</span>
             <span>${amount.toFixed(2)}</span>
         </div>
     );

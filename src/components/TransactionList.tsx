@@ -9,6 +9,11 @@ function TransactionList({ transactions }: TransactionListProps) {
     return (
         <div className="transaction-list">
             <h2>Recent Transactions</h2>
+            <div className="transaction-header">
+                <span>Customer</span>
+                <span>Type</span>
+                <span>Amount</span>
+            </div>
             {transactions.map((transaction) => (
                 <TransactionItem
                     key={transaction.id}
