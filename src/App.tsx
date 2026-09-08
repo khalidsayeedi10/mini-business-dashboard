@@ -1,13 +1,21 @@
+import TransactionList from "./components/TransactionList";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import SummaryCard from "./components/SummaryCard";
 import { useState } from "react";
+import { type Transaction } from "./types/transactions";
 
 function App() {
     const summaryCardsData = [
         { title: "Total Revenue", value: "$12,500" },
         { title: "Customers", value: "128" },
     ];
+
+    const transactions: Transaction[] = [
+    { id: 1, customer: "Ahmad", type: "Sale", amount: 500 },
+    { id: 2, customer: "Sara", type: "Sale", amount: 320 },
+    { id: 3, customer: "Ali", type: "Expense", amount: 150 },
+];
 
     const [showExpenses, setShowExpenses] = useState(true);
 
@@ -31,13 +39,17 @@ function App() {
                                 title={card.title}
                                 value={card.value}
                             />
-                        ))}{showExpenses && (
+                        ))
+                        }
+                        
+                        {showExpenses && (
                             <SummaryCard
                                 title="Total Expenses"
                                 value="$4200"
                             />
                         )}
                     </div>
+                    <TransactionList transactions={transactions} />
                 </main>
             </div>
         </>
