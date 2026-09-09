@@ -1,9 +1,11 @@
-import TransactionList from "./components/TransactionList";
+import { useState } from "react";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import SummaryCard from "./components/SummaryCard";
-import { useState } from "react";
+import TransactionList from "./components/TransactionList";
 import { type Transaction } from "./types/transactions";
+
+type TransactionFilter = "All" | "Sale" | "Expense";
 
 function App() {
     const summaryCardsData = [
@@ -12,12 +14,22 @@ function App() {
     ];
 
     const transactions: Transaction[] = [
-    { id: 1, customer: "Ahmad", type: "Sale", amount: 500 },
-    { id: 2, customer: "Sara", type: "Sale", amount: 320 },
-    { id: 3, customer: "Ali", type: "Expense", amount: 150 },
-];
+        { id: 1, customer: "Ahmad", type: "Sale", amount: 500 },
+        { id: 2, customer: "Sara", type: "Sale", amount: 320 },
+        { id: 3, customer: "Ali", type: "Expense", amount: 150 },
+    ];
 
     const [showExpenses, setShowExpenses] = useState(true);
+
+    const [selectedFilter, setSelectedFilter] =
+        useState<TransactionFilter>("All");
+
+    const filteredTransactions =
+        selectedFilter === "All"
+            ? transactions
+            : transactions.filter(
+                  (transaction) => transaction.type === selectedFilter
+              );
 
     return (
         <>
@@ -29,9 +41,15 @@ function App() {
                 <main className="main-content">
                     <h2>Dashboard</h2>
                     <p>Welcome to your business dashboard.</p>
-                    <button onClick={() => setShowExpenses(!showExpenses)}>
-                        {showExpenses ? "Hide Expenses" : "Show Expenses"}
+
+                    <button
+                        onClick={() => setShowExpenses(!showExpenses)}
+                    >
+                        {showExpenses
+                            ? "Hide Expenses"
+                            : "Show Expenses"}
                     </button>
+
                     <div className="summary-cards">
                         {summaryCardsData.map((card, index) => (
                             <SummaryCard
@@ -39,9 +57,8 @@ function App() {
                                 title={card.title}
                                 value={card.value}
                             />
-                        ))
-                        }
-                        
+                        ))}
+
                         {showExpenses && (
                             <SummaryCard
                                 title="Total Expenses"
@@ -49,7 +66,12 @@ function App() {
                             />
                         )}
                     </div>
-                    <TransactionList transactions={transactions} />
+
+                    <TransactionList
+                        transactions={filteredTransactions}
+                        selectedFilter={selectedFilter}
+                        onFilterChange={setSelectedFilter}
+                    />
                 </main>
             </div>
         </>

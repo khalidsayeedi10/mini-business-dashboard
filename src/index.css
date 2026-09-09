@@ -63,3 +63,22 @@ body {
     width: 100%;
     overflow-x: auto;
 }
+
+.transaction-filters {
+    display: flex;
+    gap: 8px;
+    margin: 16px 0;
+}
+
+.transaction-filters button {
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: white;
+    cursor: pointer;
+}
+
+.transaction-filters button.active {
+    background: #333;
+    color: white;
+}
